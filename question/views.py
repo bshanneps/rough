@@ -25,7 +25,7 @@ def edit(request,id):
     question = Question.objects.get(id = id)
     return render(request, 'question/edit.html', {'question': question})
 
-def update(request, id):
+def update(request,id):
     question = Question.objects.get(id=id)
     form = QuestionForm(request.POST, instance = question)
     # print(id)
@@ -33,12 +33,22 @@ def update(request, id):
         form.save()
         # print("Hello")
         return redirect("/show/")
-    return render(request, 'question/edit.html', {'question': question})
+    else:
+        # print(form.errors)
+        return render(request, 'question/edit.html', {'question': question,'form':form})
 
 def delete(request,id):
     question = Question.objects.get(id = id)
 
     if request.method == "POST":
         question.delete()
-        return redirect("/show")
+        return redirect("/show/")
     return render(request, 'question/delete.html', {'question': question})
+
+# def error(request):
+#     form = QuestionForm(request.POST, instance=question)
+#     if form.is_valid:
+#         form.save()
+#         return redirect("show")
+#     else:
+#         form.errors(request, "/error/")

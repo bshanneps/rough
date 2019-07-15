@@ -19,7 +19,7 @@
     <div class="form-group row">
     <label class="col-sm-2 col-form-label">Title</label>
     <div class="col-sm-4">
-        <label for="id_title"></label><input type="text" name="text" id="id_title" required maxlength="200" value="{{ question.title }}"/>
+        <label for="id_title"></label><input type="text" name="title" id="id_title" required maxlength="200" value="{{ question.title }}"/>
     </div>
   </div>
   <div class="form-group row">
@@ -45,6 +45,14 @@
       <div class = "col-sm-4">
       <button type="submit" class="btn btn-success">Update</button>
     </div>
+      <div>
+          {% if form.errors %}
+                {% for form in form.errors %}
+                    <p>There is an error!!</p>
+{#                    <a class = "btn btn-primary" href="edit.html">Go Back</a>#}
+                {% endfor %}
+          {% endif %}
+      </div>
    </div>
     </div>
 </form>
